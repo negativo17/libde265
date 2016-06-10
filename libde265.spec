@@ -1,11 +1,14 @@
+%global commit0 503af1932461419666e6766b28f27a759b04f3fc
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+
 Name:       libde265
 Summary:    Open H.265 video codec implementation
 Version:    1.0.2
-Release:    2%{?dist}
+Release:    3.%{?shortcommit0}%{?dist}
 License:    LGPLv3+
 URL:        http://www.libde265.org/
 
-Source:     https://github.com/strukturag/%{name}/releases/download/v%{version}/%{name}-%{version}.tar.gz
+Source0:    https://github.com/strukturag/%{name}/archive/%{commit0}/%{name}-%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 
 BuildRequires:    autoconf
 BuildRequires:    automake
@@ -45,7 +48,8 @@ it easy to integrate it into other software.
 Sample applications using %{name} are provided by this package.
 
 %prep
-%autosetup
+%autosetup -n %{name}-%{commit0}
+sed -i -e 's/PIX_FMT/AV_PIX_FMT/g' sherlock265/VideoDecoder.cc
 
 %build
 autoreconf -vif
@@ -54,11 +58,9 @@ make %{?_smp_mflags}
 
 %install
 %make_install
-find %{buildroot} -type f -name '*.a' -delete
-find %{buildroot} -type f -name '*.la' -exec rm -f {} \;
-#mv %{buildroot}%{_bindir}/dec265 %{buildroot}%{_bindir}/libde265-dec265
-#mv %{buildroot}%{_bindir}/sherlock265 %{buildroot}%{_bindir}/libde265-sherlock265
+find %{buildroot} -type f -name '*.la' -delete
 # Don't package internal development tools.
+rm %{buildroot}%{_bindir}/acceleration_speed
 rm %{buildroot}%{_bindir}/bjoentegaard
 rm %{buildroot}%{_bindir}/block-rate-estim
 rm %{buildroot}%{_bindir}/enc265
@@ -90,6 +92,9 @@ rm %{buildroot}%{_bindir}/yuv-distortion
 %{_bindir}/sherlock265
 
 %changelog
+* Thu Jun 09 2016 Simone Caronni <negativo17@gmail.com> - 1.0.2-3.503af19
+- Update to lates snapshot.
+
 * Sun Jun 05 2016 Simone Caronni <negativo17@gmail.com> - 1.0.2-2
 - Clan up SPEC file.
 

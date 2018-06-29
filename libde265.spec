@@ -1,14 +1,11 @@
-%global commit0 503af1932461419666e6766b28f27a759b04f3fc
-%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
-
 Name:       libde265
 Summary:    Open H.265 video codec implementation
-Version:    1.0.2
-Release:    3.%{?shortcommit0}%{?dist}
+Version:    1.0.3
+Release:    1%{?dist}
 License:    LGPLv3+
 URL:        http://www.libde265.org/
 
-Source0:    https://github.com/strukturag/%{name}/archive/%{commit0}/%{name}-%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
+Source0:    https://github.com/strukturag/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires:    autoconf
 BuildRequires:    automake
@@ -48,17 +45,18 @@ it easy to integrate it into other software.
 Sample applications using %{name} are provided by this package.
 
 %prep
-%autosetup -n %{name}-%{commit0}
+%autosetup
 sed -i -e 's/PIX_FMT/AV_PIX_FMT/g' sherlock265/VideoDecoder.cc
 
 %build
 autoreconf -vif
 %configure --disable-silent-rules --disable-static
-make %{?_smp_mflags}
+%make_build
 
 %install
 %make_install
-find %{buildroot} -type f -name '*.la' -delete
+find %{buildroot} -name '*.la' -delete
+
 # Don't package internal development tools.
 rm %{buildroot}%{_bindir}/acceleration_speed
 rm %{buildroot}%{_bindir}/bjoentegaard
@@ -70,21 +68,18 @@ rm %{buildroot}%{_bindir}/rd-curves
 rm %{buildroot}%{_bindir}/tests
 rm %{buildroot}%{_bindir}/yuv-distortion
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %files
-%{!?_licensedir:%global license %%doc}
 %license COPYING
 %doc AUTHORS
-%{_libdir}/*.so.*
+%{_libdir}/%{name}.so.*
 
 %files devel
 %doc README.md
 %{_includedir}/%{name}/
-%{_libdir}/*.so
-%{_libdir}/pkgconfig/*.pc
+%{_libdir}/%{name}.so
+%{_libdir}/pkgconfig/%{name}.pc
 
 %files examples
 %doc README.md
@@ -92,6 +87,10 @@ rm %{buildroot}%{_bindir}/yuv-distortion
 %{_bindir}/sherlock265
 
 %changelog
+* Fri Jun 29 2018 Simone Caronni <negativo17@gmail.com> - 1.0.3-1
+- Update to 1.0.3.
+- Clean up SPEC file.
+
 * Thu Jun 09 2016 Simone Caronni <negativo17@gmail.com> - 1.0.2-3.503af19
 - Update to lates snapshot.
 

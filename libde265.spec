@@ -1,7 +1,7 @@
 Name:       libde265
 Summary:    Open H.265 video codec implementation
 Version:    1.0.3
-Release:    1%{?dist}
+Release:    2%{?dist}
 License:    LGPLv3+
 URL:        http://www.libde265.org/
 
@@ -9,6 +9,7 @@ Source0:    https://github.com/strukturag/%{name}/archive/v%{version}.tar.gz#/%{
 
 BuildRequires:    autoconf
 BuildRequires:    automake
+BuildRequires:    gcc
 BuildRequires:    libtool
 BuildRequires:    pkgconfig(libswscale)
 BuildRequires:    pkgconfig(QtCore)
@@ -87,6 +88,9 @@ rm %{buildroot}%{_bindir}/yuv-distortion
 %{_bindir}/sherlock265
 
 %changelog
+* Wed Sep 26 2018 Simone Caronni <negativo17@gmail.com> - 1.0.3-2
+- Add gcc as build requirement.
+
 * Fri Jun 29 2018 Simone Caronni <negativo17@gmail.com> - 1.0.3-1
 - Update to 1.0.3.
 - Clean up SPEC file.

@@ -1,9 +1,9 @@
 Name:       libde265
 Summary:    Open H.265 video codec implementation
-Version:    1.0.3
-Release:    2%{?dist}
+Version:    1.0.5
+Release:    1%{?dist}
 License:    LGPLv3+
-URL:        http://www.libde265.org/
+URL:        https://www.libde265.org/
 
 Source0:    https://github.com/strukturag/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
@@ -12,8 +12,8 @@ BuildRequires:    automake
 BuildRequires:    gcc
 BuildRequires:    libtool
 BuildRequires:    pkgconfig(libswscale)
-BuildRequires:    pkgconfig(QtCore)
-BuildRequires:    pkgconfig(QtGui)
+BuildRequires:    pkgconfig(Qt5Core)
+BuildRequires:    pkgconfig(Qt5Gui)
 BuildRequires:    pkgconfig(sdl)
 
 %description
@@ -46,8 +46,7 @@ it easy to integrate it into other software.
 Sample applications using %{name} are provided by this package.
 
 %prep
-%autosetup
-sed -i -e 's/PIX_FMT/AV_PIX_FMT/g' sherlock265/VideoDecoder.cc
+%autosetup -p1
 
 %build
 autoreconf -vif
@@ -88,6 +87,10 @@ rm %{buildroot}%{_bindir}/yuv-distortion
 %{_bindir}/sherlock265
 
 %changelog
+* Sun Jan 19 2020 Simone Caronni <negativo17@gmail.com> - 1.0.5-1
+- Update to 1.0.5.
+- Update SPEC file and fix build with recent Qt and FFmpeg.
+
 * Wed Sep 26 2018 Simone Caronni <negativo17@gmail.com> - 1.0.3-2
 - Add gcc as build requirement.
 

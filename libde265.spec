@@ -73,7 +73,8 @@ rm %{buildroot}%{_bindir}/yuv-distortion
 %files
 %license COPYING
 %doc AUTHORS
-%{_libdir}/%{name}.so.*
+%{_libdir}/%{name}.so.0
+%{_libdir}/%{name}.so.0.1.1
 
 %files devel
 %doc README.md

@@ -1,7 +1,7 @@
 Name:       libde265
 Summary:    Open H.265 video codec implementation
 Version:    1.0.8
-Release:    1%{?dist}
+Release:    2%{?dist}
 License:    LGPLv3+
 URL:        https://www.libde265.org/
 
@@ -88,6 +88,9 @@ rm %{buildroot}%{_bindir}/yuv-distortion
 %{_bindir}/sherlock265
 
 %changelog
+* Wed Apr 06 2022 Simone Caronni <negativo17@gmail.com> - 1.0.8-2
+- Rebuild for updated dependencies.
+
 * Sat Mar 19 2022 Simone Caronni <negativo17@gmail.com> - 1.0.8-1
 - Update to 1.0.8.
 

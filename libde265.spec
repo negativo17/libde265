@@ -51,7 +51,7 @@ Various sample and test applications using %{name} are provided by this package.
 
 %build
 autoreconf -vif
-%configure --disable-silent-rules --disable-static
+%configure --disable-silent-rules --disable-static --enable-encoder
 %make_build
 
 %install
@@ -78,6 +78,7 @@ find %{buildroot} -name '*.la' -delete
 %{_bindir}/bjoentegaard
 %{_bindir}/block-rate-estim
 %{_bindir}/dec265
+%{_bindir}/enc265
 %{_bindir}/gen-enc-table
 %{_bindir}/hdrcopy
 %{_bindir}/rd-curves

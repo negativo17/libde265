@@ -33,17 +33,18 @@ it easy to integrate it into other software.
 The development headers for compiling programs that use %{name} are provided
 by this package.
 
-%package examples
+%package tools
 License:    GPLv3+
 Summary:    Open H.265 video codec implementation - examples
-Requires:   %{name}%{?_isa} = %{version}-%{release}
+Obsoletes:  %{name}-samples < %{version}-%{release}
+Provides:   %{name}-samples%{?_isa} = %{version}-%{release}
 
-%description examples
+%description tools
 %{name} is an open source implementation of the H.265 video codec.
 It is written from scratch for simplicity and efficiency. Its simple API makes
 it easy to integrate it into other software.
 
-Sample applications using %{name} are provided by this package.
+Various sample and test applications using %{name} are provided by this package.
 
 %prep
 %autosetup -p1
@@ -56,17 +57,6 @@ autoreconf -vif
 %install
 %make_install
 find %{buildroot} -name '*.la' -delete
-
-# Don't package internal development tools.
-rm %{buildroot}%{_bindir}/acceleration_speed
-rm %{buildroot}%{_bindir}/bjoentegaard
-rm %{buildroot}%{_bindir}/block-rate-estim
-rm %{buildroot}%{_bindir}/enc265
-rm %{buildroot}%{_bindir}/gen-enc-table
-rm %{buildroot}%{_bindir}/hdrcopy
-rm %{buildroot}%{_bindir}/rd-curves
-rm %{buildroot}%{_bindir}/tests
-rm %{buildroot}%{_bindir}/yuv-distortion
 
 %{?ldconfig_scriptlets}
 
@@ -82,14 +72,23 @@ rm %{buildroot}%{_bindir}/yuv-distortion
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
 
-%files examples
+%files tools
 %doc README.md
+%{_bindir}/acceleration_speed
+%{_bindir}/bjoentegaard
+%{_bindir}/block-rate-estim
 %{_bindir}/dec265
+%{_bindir}/gen-enc-table
+%{_bindir}/hdrcopy
+%{_bindir}/rd-curves
 %{_bindir}/sherlock265
+%{_bindir}/tests
+%{_bindir}/yuv-distortion
 
 %changelog
 * Fri Feb 03 2023 Simone Caronni <negativo17@gmail.com> - 1.0.11-1
 - Update to 1.0.11.
+- Move all tools/samples in the tools subpackage.
 
 * Tue Oct 25 2022 Simone Caronni <negativo17@gmail.com> - 1.0.9-1
 - Update to 1.0.9.

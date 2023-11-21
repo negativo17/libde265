@@ -1,6 +1,6 @@
 Name:       libde265
 Summary:    Open H.265 video codec implementation
-Version:    1.0.12
+Version:    1.0.13
 Release:    1%{?dist}
 License:    LGPLv3+
 URL:        https://www.libde265.org/
@@ -64,7 +64,7 @@ find %{buildroot} -name '*.la' -delete
 %license COPYING
 %doc AUTHORS
 %{_libdir}/%{name}.so.0
-%{_libdir}/%{name}.so.0.1.5
+%{_libdir}/%{name}.so.0.1.6
 
 %files devel
 %doc README.md
@@ -80,13 +80,15 @@ find %{buildroot} -name '*.la' -delete
 %{_bindir}/dec265
 %{_bindir}/enc265
 %{_bindir}/gen-enc-table
-%{_bindir}/hdrcopy
 %{_bindir}/rd-curves
 %{_bindir}/sherlock265
 %{_bindir}/tests
 %{_bindir}/yuv-distortion
 
 %changelog
+* Tue Nov 21 2023 Simone Caronni <negativo17@gmail.com> - 1.0.13-1
+- Update to 1.0.13.
+
 * Tue Jun 13 2023 Simone Caronni <negativo17@gmail.com> - 1.0.12-1
 - Update to 1.0.12.
 

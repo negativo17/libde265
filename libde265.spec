@@ -1,6 +1,6 @@
 Name:       libde265
 Summary:    Open H.265 video codec implementation
-Version:    1.0.13
+Version:    1.0.14
 Release:    1%{?dist}
 License:    LGPLv3+
 URL:        https://www.libde265.org/
@@ -64,7 +64,7 @@ find %{buildroot} -name '*.la' -delete
 %license COPYING
 %doc AUTHORS
 %{_libdir}/%{name}.so.0
-%{_libdir}/%{name}.so.0.1.6
+%{_libdir}/%{name}.so.0.1.7
 
 %files devel
 %doc README.md
@@ -86,6 +86,9 @@ find %{buildroot} -name '*.la' -delete
 %{_bindir}/yuv-distortion
 
 %changelog
+* Tue Nov 21 2023 Simone Caronni <negativo17@gmail.com> - 1.0.14-1
+- Update to 1.0.14 even if not using CMake.
+
 * Tue Nov 21 2023 Simone Caronni <negativo17@gmail.com> - 1.0.13-1
 - Update to 1.0.13.
 

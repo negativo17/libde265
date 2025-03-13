@@ -1,11 +1,15 @@
+%global commit b67f401c373f182a426a2d79e77e66f9277981da
+%global date 20250123
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+
 Name:       libde265
 Summary:    Open H.265 video codec implementation
-Version:    1.0.15
-Release:    1%{?dist}
+Version:    1.0.15^%{date}git%{shortcommit}
+Release:    2%{?dist}
 License:    LGPLv3+
 URL:        https://www.libde265.org/
 
-Source0:    https://github.com/strukturag/%{name}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+Source0:    https://github.com/strukturag/%{name}/archive/%{commit}.tar.gz#/%{name}-%{shortcommit}.tar.gz
 
 BuildRequires:    autoconf
 BuildRequires:    automake
@@ -47,7 +51,7 @@ it easy to integrate it into other software.
 Various sample and test applications using %{name} are provided by this package.
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-%{commit}
 
 %build
 autoreconf -vif
@@ -57,8 +61,6 @@ autoreconf -vif
 %install
 %make_install
 find %{buildroot} -name '*.la' -delete
-
-%{?ldconfig_scriptlets}
 
 %files
 %license COPYING
@@ -74,7 +76,6 @@ find %{buildroot} -name '*.la' -delete
 
 %files tools
 %doc README.md
-%{_bindir}/acceleration_speed
 %{_bindir}/bjoentegaard
 %{_bindir}/block-rate-estim
 %{_bindir}/dec265
@@ -86,6 +87,11 @@ find %{buildroot} -name '*.la' -delete
 %{_bindir}/yuv-distortion
 
 %changelog
+* Thu Mar 13 2025 Simone Caronni <negativo17@gmail.com> - 1.0.15^20250123gitb67f401-2
+- Update to latest snapshot.
+- Drop ldconfig_scriptlets.
+- Trim changelog.
+
 * Thu Dec 21 2023 Simone Caronni <negativo17@gmail.com> - 1.0.15-1
 - Update to 1.0.15.
 
@@ -101,35 +107,3 @@ find %{buildroot} -name '*.la' -delete
 * Fri Feb 03 2023 Simone Caronni <negativo17@gmail.com> - 1.0.11-1
 - Update to 1.0.11.
 - Move all tools/samples in the tools subpackage.
-
-* Tue Oct 25 2022 Simone Caronni <negativo17@gmail.com> - 1.0.9-1
-- Update to 1.0.9.
-
-* Wed Apr 06 2022 Simone Caronni <negativo17@gmail.com> - 1.0.8-3
-- Rebuild for updated dependencies.
-
-* Wed Apr 06 2022 Simone Caronni <negativo17@gmail.com> - 1.0.8-2
-- Rebuild for updated dependencies.
-
-* Sat Mar 19 2022 Simone Caronni <negativo17@gmail.com> - 1.0.8-1
-- Update to 1.0.8.
-
-* Sun Jan 19 2020 Simone Caronni <negativo17@gmail.com> - 1.0.5-1
-- Update to 1.0.5.
-- Update SPEC file and fix build with recent Qt and FFmpeg.
-
-* Wed Sep 26 2018 Simone Caronni <negativo17@gmail.com> - 1.0.3-2
-- Add gcc as build requirement.
-
-* Fri Jun 29 2018 Simone Caronni <negativo17@gmail.com> - 1.0.3-1
-- Update to 1.0.3.
-- Clean up SPEC file.
-
-* Thu Jun 09 2016 Simone Caronni <negativo17@gmail.com> - 1.0.2-3.503af19
-- Update to lates snapshot.
-
-* Sun Jun 05 2016 Simone Caronni <negativo17@gmail.com> - 1.0.2-2
-- Clan up SPEC file.
-
-* Tue May 31 2016 Joachim Bauch <bauch@struktur.de> - 1.0.2-1
-- Initial version.

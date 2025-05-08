@@ -1,15 +1,11 @@
-%global commit b67f401c373f182a426a2d79e77e66f9277981da
-%global date 20250123
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-
 Name:       libde265
 Summary:    Open H.265 video codec implementation
-Version:    1.0.15^%{date}git%{shortcommit}
-Release:    2%{?dist}
+Version:    1.0.16
+Release:    1%{?dist}
 License:    LGPLv3+
 URL:        https://www.libde265.org/
 
-Source0:    https://github.com/strukturag/%{name}/archive/%{commit}.tar.gz#/%{name}-%{shortcommit}.tar.gz
+Source0:    https://github.com/strukturag/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:    autoconf
 BuildRequires:    automake
@@ -51,7 +47,7 @@ it easy to integrate it into other software.
 Various sample and test applications using %{name} are provided by this package.
 
 %prep
-%autosetup -p1 -n %{name}-%{commit}
+%autosetup -p1
 
 %build
 autoreconf -vif
@@ -66,7 +62,7 @@ find %{buildroot} -name '*.la' -delete
 %license COPYING
 %doc AUTHORS
 %{_libdir}/%{name}.so.0
-%{_libdir}/%{name}.so.0.1.8
+%{_libdir}/%{name}.so.0.1.9
 
 %files devel
 %doc README.md
@@ -87,6 +83,9 @@ find %{buildroot} -name '*.la' -delete
 %{_bindir}/yuv-distortion
 
 %changelog
+* Thu May 08 2025 Simone Caronni <negativo17@gmail.com> - 1.0.16-1
+- Update to 1.0.16.
+
 * Thu Mar 13 2025 Simone Caronni <negativo17@gmail.com> - 1.0.15^20250123gitb67f401-2
 - Update to latest snapshot.
 - Drop ldconfig_scriptlets.

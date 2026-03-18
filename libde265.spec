@@ -1,20 +1,18 @@
 Name:       libde265
 Summary:    Open H.265 video codec implementation
-Version:    1.0.16
+Version:    1.0.17
 Release:    1%{?dist}
 License:    LGPLv3+
 URL:        https://www.libde265.org/
 
 Source0:    https://github.com/strukturag/%{name}/archive/v%{version}/%{name}-%{version}.tar.gz
 
-BuildRequires:    autoconf
-BuildRequires:    automake
+BuildRequires:    cmake
 BuildRequires:    gcc
-BuildRequires:    libtool
 BuildRequires:    pkgconfig(libswscale)
 BuildRequires:    pkgconfig(Qt5Core)
 BuildRequires:    pkgconfig(Qt5Gui)
-BuildRequires:    pkgconfig(sdl)
+BuildRequires:    pkgconfig(sdl2)
 
 %description
 %{name} is an open source implementation of the H.265 video codec.
@@ -50,23 +48,25 @@ Various sample and test applications using %{name} are provided by this package.
 %autosetup -p1
 
 %build
-autoreconf -vif
-%configure --disable-silent-rules --disable-static --enable-encoder
-%make_build
+%cmake \
+    -DENABLE_ENCODER=ON \
+    -DENABLE_SHERLOCK265=ON \
+    -DENABLE_TOOLS=ON
+%cmake_build
 
 %install
-%make_install
-find %{buildroot} -name '*.la' -delete
+%cmake_install
 
 %files
 %license COPYING
 %doc AUTHORS
 %{_libdir}/%{name}.so.0
-%{_libdir}/%{name}.so.0.1.9
+%{_libdir}/%{name}.so.0.1.10
 
 %files devel
 %doc README.md
 %{_includedir}/%{name}/
+%{_libdir}/cmake/%{name}/
 %{_libdir}/%{name}.so
 %{_libdir}/pkgconfig/%{name}.pc
 
@@ -83,6 +83,10 @@ find %{buildroot} -name '*.la' -delete
 %{_bindir}/yuv-distortion
 
 %changelog
+* Wed Mar 18 2026 Simone Caronni <negativo17@gmail.com> - 1.0.17-1
+- Update to 1.0.17.
+- Switch to CMake.
+
 * Thu May 08 2025 Simone Caronni <negativo17@gmail.com> - 1.0.16-1
 - Update to 1.0.16.
 

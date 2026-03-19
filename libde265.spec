@@ -1,6 +1,6 @@
 Name:       libde265
 Summary:    Open H.265 video codec implementation
-Version:    1.0.17
+Version:    1.0.18
 Release:    1%{?dist}
 License:    LGPLv3+
 URL:        https://www.libde265.org/
@@ -48,10 +48,7 @@ Various sample and test applications using %{name} are provided by this package.
 %autosetup -p1
 
 %build
-%cmake \
-    -DENABLE_ENCODER=ON \
-    -DENABLE_SHERLOCK265=ON \
-    -DENABLE_TOOLS=ON
+%cmake -DENABLE_SHERLOCK265=ON
 %cmake_build
 
 %install
@@ -61,7 +58,7 @@ Various sample and test applications using %{name} are provided by this package.
 %license COPYING
 %doc AUTHORS
 %{_libdir}/%{name}.so.0
-%{_libdir}/%{name}.so.0.1.10
+%{_libdir}/%{name}.so.0.1.11
 
 %files devel
 %doc README.md
@@ -72,17 +69,13 @@ Various sample and test applications using %{name} are provided by this package.
 
 %files tools
 %doc README.md
-%{_bindir}/bjoentegaard
-%{_bindir}/block-rate-estim
 %{_bindir}/dec265
-%{_bindir}/enc265
-%{_bindir}/gen-enc-table
-%{_bindir}/rd-curves
 %{_bindir}/sherlock265
-%{_bindir}/tests
-%{_bindir}/yuv-distortion
 
 %changelog
+* Thu Mar 19 2026 Simone Caronni <negativo17@gmail.com> - 1.0.18-1
+- Update to 1.0.18, drop encoder and development tools.
+
 * Wed Mar 18 2026 Simone Caronni <negativo17@gmail.com> - 1.0.17-1
 - Update to 1.0.17.
 - Switch to CMake.

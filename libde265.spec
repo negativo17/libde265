@@ -1,6 +1,6 @@
 Name:       libde265
 Summary:    Open H.265 video codec implementation
-Version:    1.0.18
+Version:    1.0.19
 Release:    1%{?dist}
 License:    LGPLv3+
 URL:        https://www.libde265.org/
@@ -58,7 +58,7 @@ Various sample and test applications using %{name} are provided by this package.
 %license COPYING
 %doc AUTHORS
 %{_libdir}/%{name}.so.0
-%{_libdir}/%{name}.so.0.1.11
+%{_libdir}/%{name}.so.0.1.12
 
 %files devel
 %doc README.md
@@ -73,6 +73,9 @@ Various sample and test applications using %{name} are provided by this package.
 %{_bindir}/sherlock265
 
 %changelog
+* Wed May 20 2026 Simone Caronni <negativo17@gmail.com> - 1.0.19-1
+- Update to 1.0.19.
+
 * Thu Mar 19 2026 Simone Caronni <negativo17@gmail.com> - 1.0.18-1
 - Update to 1.0.18, drop encoder and development tools.
 
